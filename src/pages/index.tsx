@@ -16,11 +16,57 @@ const Home = () => {
   const onClick = (x: number, y: number) => {
     console.log(x, y);
     const newBoard: number[][] = JSON.parse(JSON.stringify(board));
-    if (board[y + 1] !== undefined && board[y + 1][x] === 3 - turnColor) {
-      newBoard[y][x] = turnColor;
-      setTurnColor(3 - turnColor);
+    const directions = [
+      [-1, 0],
+      [-1, 1],
+      [0, 1],
+      [1, 1],
+      [1, 0],
+      [1, -1],
+      [-1, -1],
+      [0, -1],
+    ];
+    let dx = 0;
+    let dy = 0;
+    let p = false;
+    if (board[y][x] === 0) {
+      for (const d of directions) {
+        dx = d[1];
+        dy = d[0];
+        if (
+          board[y + dy] !== undefined &&
+          board[y + dy][x + dx] !== undefined &&
+          board[y + dy][x + dx] === 3 - turnColor
+        ) {
+          for (let i = 1; i < 8; i++) {
+            if (
+              board[y + dy * i] !== undefined &&
+              board[y + dy * i][x + dx * i] !== undefined &&
+              board[y + dy * i][x + dx * i] === turnColor
+            ) {
+              let a = 0;
+              for (let i2 = 1; i2 <= i; i2++) {
+                if (board[y + dy * i2][x + dx * i2] !== 0) {
+                  a++;
+                }
+              }
+              if (a === i) {
+                newBoard[y][x] = turnColor;
+                p = true;
+                for (let i2 = 1; i2 < i; i2++) {
+                  newBoard[y + dy * i2][x + dx * i2] = turnColor;
+                }
+              }
+              break;
+            }
+          }
+        }
+        if (p) {
+          setTurnColor(3 - turnColor);
+          setBoard(newBoard);
+        }
+      }
     }
-    setBoard(newBoard);
   };
   return (
     <div className={styles.container}>
