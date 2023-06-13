@@ -28,7 +28,9 @@ const Home = () => {
     const newBoard: number[][] = JSON.parse(JSON.stringify(board));
     let p = false;
     if (board[y][x] === 0) {
-      for (const [dy, dx] of directions) {
+      for (const d of directions) {
+        const dx = d[1];
+        const dy = d[0];
         if (
           board[y + dy] !== undefined &&
           board[y + dy][x + dx] !== undefined &&
