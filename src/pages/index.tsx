@@ -13,24 +13,22 @@ const Home = () => {
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
   ]);
-  const directions = [
-    [-1, 0],
-    [-1, 1],
-    [0, 1],
-    [1, 1],
-    [1, 0],
-    [1, -1],
-    [-1, -1],
-    [0, -1],
-  ];
   const onClick = (x: number, y: number) => {
     console.log(x, y);
+    const directions: number[][] = [
+      [-1, 0],
+      [-1, 1],
+      [0, 1],
+      [1, 1],
+      [1, 0],
+      [1, -1],
+      [-1, -1],
+      [0, -1],
+    ];
     const newBoard: number[][] = JSON.parse(JSON.stringify(board));
     let p = false;
     if (board[y][x] === 0) {
-      for (const d of directions) {
-        const dx = d[1];
-        const dy = d[0];
+      for (const [dy, dx] of directions) {
         if (
           board[y + dy] !== undefined &&
           board[y + dy][x + dx] !== undefined &&
