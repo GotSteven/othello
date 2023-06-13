@@ -26,7 +26,7 @@ const Home = () => {
   const onClick = (x: number, y: number) => {
     console.log(x, y);
     const newBoard: number[][] = JSON.parse(JSON.stringify(board));
-    let k = false;
+    let p = false;
     if (board[y][x] === 0) {
       for (const [dy, dx] of directions) {
         if (
@@ -48,7 +48,7 @@ const Home = () => {
               }
               if (a === i) {
                 newBoard[y][x] = turnColor;
-                k = true;
+                p = true;
                 for (let i2 = 1; i2 < i; i2++) {
                   newBoard[y + dy * i2][x + dx * i2] = turnColor;
                 }
@@ -58,7 +58,7 @@ const Home = () => {
           }
         }
       }
-      if (k) {
+      if (p) {
         setTurnColor(3 - turnColor);
         setBoard(newBoard);
       }
