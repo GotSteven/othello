@@ -30,7 +30,7 @@ const Home = () => {
     if (board[y][x] === 0) {
       //クリックした場所に石がないなら
       for (const [dy, dx] of directions) {
-        //方向をひとつずつ、xとyに分けて取り出す
+        //方向をひとつずつ dy と dx に分けて取り出す
         if (
           board[y + dy] !== undefined &&
           board[y + dy][x + dx] !== undefined &&
@@ -61,7 +61,7 @@ const Home = () => {
                   newBoard[y + dy * i3][x + dx * i3] = turnColor; //はさんでいる相手の石を自分の石に変える
                 }
               }
-              break; //石を置き終わったのでbreak
+              break; //今の方向は石を置き終わったので for (let i = 1; i < 8; i++) を break し次の方向へ
             }
           }
         }
