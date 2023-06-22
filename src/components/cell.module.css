@@ -1,0 +1,13 @@
+.cell {
+  height: 80px;
+  width: 80px;
+  border: solid 1px black;
+}
+
+.stone {
+  height: 56px;
+  width: 56px;
+  border-radius: 100%;
+  background-color: white;
+  margin: 12px;
+}
